@@ -1,13 +1,17 @@
 let operation = '';
-const numArr = [];
-let num = 0;
+let numArr = [];
+let numTemp = 0;
+let num1 = 0;
+let num2 = 0;
+let ans = 0;
 
 const display = document.querySelector('.display');
 display.textContent = 0;
 const numpad = document.querySelector('.numpad');
 const operations = document.querySelector('.operations');
+const actions = document.querySelector('.actions');
 
-function add(a, num2) { return a + num2; }
+function add(a, b) { return a + b; }
 
 function subtract(a, b) { return a - b; }
 
@@ -27,8 +31,6 @@ function operate(operator, a, b) {
         return multiply(a, b);
     case '/':
         return divide(a, b);
-    case 'clear':
-        return clear();
     default:
         return 'Invalid operation';
     }
@@ -36,10 +38,26 @@ function operate(operator, a, b) {
 
 operations.addEventListener('click', (e) => {
     operation = e.target.value;
+    num1 = numTemp;
+    numArr = [];
 });
 
 numpad.addEventListener('click', (e) => {
     numArr.push(e.target.value);
-    num = Number(numArr.join(''));
-    display.textContent = num;
+    numTemp = Number(numArr.join(''));
+    display.textContent = numTemp;
+});
+
+actions.addEventListener('click', (e) => {
+    const action = e.target.value;
+    numArr = [];
+    if (action === '=') {
+        num2 = numTemp;
+        ans = operate(operation, num1, num2);
+        display.textContent = `${num1} ${operation} ${num2} = ${ans}`;
+    }
+
+    if (action === 'clear') {
+        display.textContent = 0;
+    }
 });
