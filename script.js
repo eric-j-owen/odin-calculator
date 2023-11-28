@@ -1,30 +1,42 @@
-function add(num1, num2) {
-    return num1 + num2;
-}
+function add(a, num2) { return a + num2; }
 
-function subtract(num1, num2) {
-    return num1 - num2;
-}
+function subtract(a, b) { return a - b; }
 
-function multiply(num1, num2) {
-    return num1 * num2;
-}
+function multiply(a, b) { return a * b; }
 
-function divide(num1, num2) {
-    return num1 / num2;
-}
+function divide(a, b) { return a / b; }
 
-function operate(operator, num1, num2) {
+function operate(operator, a, b) {
     switch (operator) {
     case '+':
-        return add(num1, num2);
+        return add(a, b);
     case '-':
-        return subtract(num1, num2);
+        return subtract(a, b);
     case '*':
-        return multiply(num1, num2);
+        return multiply(a, b);
     case '/':
-        return divide(num1, num2);
+        return divide(a, b);
     default:
         return 'Invalid operation';
     }
 }
+
+let operation;
+const numArr = [];
+let num = 0;
+
+const display = document.querySelector('.display');
+display.textContent = num;
+const numpad = document.querySelector('.numpad');
+const operations = document.querySelector('.operations');
+
+operations.addEventListener('click', (e) => {
+   console.log(e.target.value);
+});
+
+numpad.addEventListener('click', (e) => {
+    numArr.push(e.target.value);
+    num = Number(numArr.join(''));
+    display.textContent = num;
+});
+
