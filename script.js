@@ -42,6 +42,7 @@ operations.forEach((button) => {
         operation = e.target.value;
         num1 = numTemp;
         numArr = [];
+        secondaryDisplay.textContent = `${num1} ${operation}`;
     });
 });
 
@@ -60,7 +61,8 @@ actions.forEach((button) => {
         if (action === '=') {
             num2 = numTemp;
             ans = operate(operation, num1, num2);
-            display.textContent = `${num1} ${operation} ${num2} = ${ans}`;
+            display.textContent = ans;
+            secondaryDisplay.textContent = `${num1} ${operation} ${num2} = ${ans}`;
         }
 
         if (action === 'ac') {
