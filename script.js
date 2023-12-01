@@ -3,11 +3,10 @@ let numArr = [];
 let numTemp = 0;
 let num1 = 0;
 let num2 = 0;
-let ans = 0;
+let ans = null;
 
 const display = document.querySelector('.display');
 const secondaryDisplay = document.querySelector('.secondary-display');
-display.textContent = 0;
 const numpad = document.querySelectorAll('.numpad > button');
 const operations = document.querySelectorAll('.operations > button');
 const actions = document.querySelectorAll('.actions > button');
@@ -24,6 +23,7 @@ function ac() {
     numArr = [];
     display.textContent = 0;
     secondaryDisplay.textContent = 0;
+    ans = null;
 }
 
 function del() {
@@ -50,7 +50,7 @@ function operate(operator, a, b) {
 operations.forEach((button) => {
     button.addEventListener('click', (e) => {
         operation = e.target.value;
-        num1 = numTemp;
+        num1 = ans || numTemp;
         numArr = [];
         secondaryDisplay.textContent = `${num1} ${operation}`;
     });
