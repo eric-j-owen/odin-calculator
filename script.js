@@ -10,6 +10,7 @@ const secondaryDisplay = document.querySelector('.secondary-display');
 const numpad = document.querySelectorAll('.numpad > button');
 const operations = document.querySelectorAll('.operations > button');
 const actions = document.querySelectorAll('.actions > button');
+const dec = document.querySelector('.numpad > button[value="."]');
 
 function add(a, b) { return a + b; }
 
@@ -23,6 +24,7 @@ function ac() {
     numArr = [];
     display.textContent = 0;
     secondaryDisplay.textContent = 0;
+    dec.disabled = false;
     ans = null;
 }
 
@@ -49,6 +51,7 @@ function operate(operator, a, b) {
 
 operations.forEach((button) => {
     button.addEventListener('click', (e) => {
+        dec.disabled = false;
         operation = e.target.value;
         num1 = ans || numTemp;
         numArr = [];
@@ -58,6 +61,7 @@ operations.forEach((button) => {
 
 numpad.forEach((button) => {
     button.addEventListener('click', (e) => {
+        if (e.target.value === '.') { dec.disabled = true; }
         numArr.push(e.target.value);
         numTemp = Number(numArr.join(''));
         display.textContent = numTemp;
@@ -68,6 +72,7 @@ actions.forEach((button) => {
     button.addEventListener('click', (e) => {
         const action = e.target.value;
         if (action === '=') {
+            dec.disabled = false;
             numArr = [];
             num2 = numTemp;
             ans = operate(operation, num1, num2);
