@@ -20,7 +20,17 @@ function multiply(a, b) { return a * b; }
 
 function divide(a, b) { return a / b; }
 
-function ac() { display.textContent = 0; }
+function ac() {
+    numArr = [];
+    display.textContent = 0;
+    secondaryDisplay.textContent = 0;
+}
+
+function del() {
+    numArr.pop();
+    numTemp = Number(numArr.join(''));
+    display.textContent = numTemp;
+}
 
 function operate(operator, a, b) {
     switch (operator) {
@@ -57,16 +67,14 @@ numpad.forEach((button) => {
 actions.forEach((button) => {
     button.addEventListener('click', (e) => {
         const action = e.target.value;
-        numArr = [];
         if (action === '=') {
+            numArr = [];
             num2 = numTemp;
             ans = operate(operation, num1, num2);
             display.textContent = ans;
             secondaryDisplay.textContent = `${num1} ${operation} ${num2} = ${ans}`;
         }
-
-        if (action === 'ac') {
-            ac();
-        }
+        if (action === 'ac') { ac(); }
+        if (action === 'del') { del(); }
     });
 });
